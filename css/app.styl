@@ -1,0 +1,259 @@
+@import 'nib'
+global-reset()
+@import '960'
+@import 'grid'
+@import 'fonts'
+
+baseFontSize = 16px
+baseLineHeight = 22px
+
+backgroundColor = darken(#fff, 10)
+  
+body
+  background-color backgroundColor
+  font-family QuicksandBook
+  font-size baseFontSize
+  line-height baseLineHeight
+  color #333
+  -webkit-font-smoothing: subpixel-antialiased;
+
+h1
+  font-size 37px
+  line-height baseLineHeight*2
+  text-shadow 0px 1px #fff
+
+p
+  margin-bottom baseLineHeight
+  &:last-child
+    margin-bottom 0
+
+::selection
+  text-shadow none
+  background: #4380b8
+
+a
+  color: #4380b8
+  text-decoration none
+  
+  &:visited
+    color: #4c5392
+  &:hover
+    text-decoration underline
+
+img.taxonPhoto
+  display block
+  border-radius 2px
+  box-shadow 0 1px 4px rgba(0,0,0,0.5)
+  border 5px solid #fefefe
+
+.ie
+  background-color blue
+  color #fff
+  font-family 'Comic Sans', 'Comic Sans MS', sans
+  padding: baseLineHeight*2 0
+  
+  a
+    text-decoration underline
+    color yellow
+
+header
+  height baseLineHeight*2.5
+  padding-top (baseLineHeight/2)
+  background #2f2f2f url(/header-pattern.png) repeat
+  box-shadow 0 -6px  8px rgba(0,0,0,0.3) inset
+  
+  #logo
+    padding-top 4px
+    a
+      font 36px/36px QuicksandBold
+      font-weight normal 
+      color #fff
+      text-decoration none
+      text-shadow 0 2px 8px rgba(0, 0, 0, 0.75), 0 -1px 0 #ccc
+  #searchForm
+    padding-top (baseLineHeight/2)
+    text-align center
+    
+    input#q
+      width 220px
+      
+  nav
+    text-align right
+    
+    a
+      background linear-gradient(top, lighten(#69D2E7,10), darken(#69D2E7, 5))
+      color #333 !important
+      line-height baseLineHeight*2
+      padding 0.5em 0.75em 0.3em 0.75em
+      border-radius 0.25em
+      box-shadow 0 1px 8px rgba(0,0,0,0.75), 0 1px 0 rgba(255,255,255,0.3) inset
+      text-shadow 0 1px 0 rgba(255,255,255,0.2)
+
+#home #screenshot
+  padding-top 5px
+
+#examples
+.exampleGroup
+  background #2f2f2f url(/header-pattern.png) repeat
+  
+  h1
+    color #eee
+    text-shadow 0 -1px 0 #000
+
+#examples
+  box-shadow 0 6px  8px rgba(0,0,0,0.3) inset
+  padding (baseLineHeight/2) 0 
+
+.exampleGroup
+  border-top 1px solid lighten(#2f2f2f, 2)
+  border-bottom 1px solid darken(#2f2f2f, 2)
+  padding baseLineHeight 0
+  
+  .example
+    clearfix()
+    color #eee !important
+    
+    img
+      max-width 100px
+      max-height 100px
+      margin-right 0.5em
+      float left
+      border-color: #eee
+      box-shadow 0 1px 5px rgba(0,0,0,0.9)
+      
+      
+    
+    .scientificName
+      font-size 23px
+   
+#about, #home, #search, #error
+  border-bottom 1px solid darken(#fff, 15)
+
+#info, #about, #home, #search, #error
+  background linear-gradient(top, darken(#fff, 1), darken(#fff, 4) )
+  padding baseLineHeight 0
+  box-shadow 0 1px 0px #fff inset
+
+#nerdAlert
+  padding-top (baseLineHeight/2)
+  
+  footer
+    text-align center
+    
+    img
+      margin-top baseLineHeight
+    
+
+#searchResults li
+  margin-bottom baseLineHeight
+  blockquote p
+    height baseLineHeight
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size 14px
+    color: #999
+
+
+#info
+  #picture
+    padding-top baseLineHeight
+    
+    img
+      max-width 240px
+      max-height 240px
+      margin auto
+      transform rotate(-2deg)
+      
+  p.eol 
+    margin-bottom: 11px
+    a
+      background linear-gradient(top, lighten(#69D2E7,10), darken(#69D2E7, 5))
+      color #fff !important
+      padding 0.5em 0.75em 0.3em 0.75em
+      border-radius 0.5em
+      border 1px solid  darken(#69D2E7, 5)
+      border-bottom-color darken(#69D2E7, 15)
+      box-shadow 0 1px 2px rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.3) inset
+      text-shadow 0 -1px 0 rgba(0,0,0,0.1)
+      font-size 11px
+      line-height 11px
+
+#timeline
+  height baseLineHeight*2
+  background darken(#fff, 2)
+  border-top 1px solid #fefefe
+  border-bottom 1px solid darken(#fff, 10)
+  
+
+  #scale
+    grid(12)
+    
+    img
+      margin-top 10px
+
+.sticky
+  #timeline
+    background none
+    
+    & .container
+      fixed top 0 left 0
+      width 100%
+      background rgba(255,255,255, 0.92)
+      z-index 1000000
+      height baseLineHeight*2
+      border-bottom 1px solid rgba(0,0,0, 0.1)
+      
+      & #scale
+        float none
+        margin auto
+        display block
+
+#aggregate li
+  background darken(#fff, 6)
+  border-bottom 1px solid darken(#fff, 13)
+  & .taxon .name
+    color darken(#FA6900, 5)
+    text-shadow 0 0 5px lighten(#FA6900, 20), 0 1px 0 #fff
+
+
+#taxa li
+  border-top 1px solid lighten(backgroundColor, 2)
+  border-bottom 1px solid darken(backgroundColor, 2)
+  
+  &:first-child
+    border-top none
+  
+.taxon
+  grid(12)
+  position relative
+  
+  .graph
+    height: baseLineHeight*4
+    padding (baseLineHeight/2)
+    
+  .name
+    absolute top (baseLineHeight*2) left 0
+    text-shadow 0 1px 0 #fff
+
+  &.noData
+    .name:after
+      content " (no data)"
+      font-size 11px
+      color #666
+      
+  &.loading
+    .name
+      color: #999
+    .graph path
+      fill #ccc
+    &.noData
+      .name:after
+        content url(/ajax-loader.gif)
+        height 16px
+        width 16px
+        margin-left 0.5em
+.graph
+  path
+    stroke-width 0
+    fill #333

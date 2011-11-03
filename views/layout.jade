@@ -1,0 +1,20 @@
+!!! 5
+html(lang="en")
+  head
+    title #{title} - synynyms
+    link(rel="stylesheet", type="text/css", href="/css/app.css")
+  body
+    //if lt IE 9
+      .ie
+        .container
+          p Hey, look pal, I know you like Internet Explorer, but the truth is that old versions of IE simply don't work well. I made this app in my spare time, and I just don't have the time or the motivation to make it work in a quirky old browser that invents its own rules. You can continue to use this browser if you'd like, but don't expect things to work correctly. 
+          p Please consider using <a href="http://www.google.com/chrome">Chrome</a>, <a href="http://www.apple.com/safari">Safari</a>, or <a href="http://getfirefox.com/">Firefox</a> instead. They're all free, and all play by the standard rules of the Web, so developers like me can make products that work well.
+    header
+      .container
+        #logo: a(href='/') synynyms
+        form#searchForm(action='/search')
+            input(name="q", id="q", type="search", placeholder="Search for a Species")
+            input(id="submit", type="submit", value="Search")
+        nav
+          a(href='/about') About
+    .main(role='main')!= body

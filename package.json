@@ -1,0 +1,30 @@
+{
+  "author": "Ryan Schenk <rschenk@gmail.com> (http://ryanschenk.com)",
+  "name": "blobtime",
+  "description": "It's time for blobs, let's blob, hang out with yourself and have a crazy blob",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "engines": {
+    "node": "0.4.x"
+  },
+  "dependencies": {
+    "csv": "0.0.x",
+	  "express": "2.4.x",
+	  "connect": "1.7.x",
+	  "jade": "0.16.x",
+	  "request": "2.1.x",
+	  "socket.io": "0.8.x",
+	  "underscore": "1.1.x",
+	  "stylus": "0.17.x",
+	  "nib": "0.2.x",
+	  "connect-assets": "2.1.x"
+  },
+  "devDependencies": {
+    "eyes": "0.1.x",
+    "node-fakeweb": "0.0.x",
+    "vows": "0.5.x"
+  }
+}

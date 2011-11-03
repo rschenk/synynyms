@@ -1,0 +1,49 @@
+[
+    {
+        "scientificName": {
+            "parser_version": "0.7.3", 
+            "verbatim": "Cavia porcellus (Linnaeus, 1758)", 
+            "positions": {
+                "0": [
+                    "genus", 
+                    5
+                ], 
+                "27": [
+                    "year", 
+                    31
+                ], 
+                "17": [
+                    "author_word", 
+                    25
+                ], 
+                "6": [
+                    "species", 
+                    15
+                ]
+            }, 
+            "parser_run": 1, 
+            "hybrid": false, 
+            "details": [
+                {
+                    "genus": {
+                        "string": "Cavia"
+                    }, 
+                    "species": {
+                        "authorship": "(Linnaeus, 1758)", 
+                        "basionymAuthorTeam": {
+                            "author": [
+                                "Linnaeus"
+                            ], 
+                            "authorTeam": "Linnaeus", 
+                            "year": "1758"
+                        }, 
+                        "string": "porcellus"
+                    }
+                }
+            ], 
+            "canonical": "Cavia porcellus", 
+            "parsed": true, 
+            "normalized": "Cavia porcellus (Linnaeus 1758)"
+        }
+    }
+]
