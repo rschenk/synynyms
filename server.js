@@ -76,13 +76,17 @@ app.get('/about', function(req, res){
 });
 
 app.get('/taxon/:id', function(req,res){
-  eol.page(req.params.id, function(page){
-    if( page.image ) {
-      page.image = page.image.replace('_medium', '_580_360'); // do a litle hack to get a bigger image from EOL
+  eol.page(req.params.id, function(err, page){
+    if(err){
+      res.render('taxon-error', {status: 502, message: 'Bad Gateway', title: "Problem Connecting to EoL"});
     } else {
-      page.image = 'http://eol.org/images/v2/img_taxon-placeholder.png';
+      if( page.image ) {
+        page.image = page.image.replace('_medium', '_580_360'); // do a litle hack to get a bigger image from EOL
+      } else {
+        page.image = 'http://eol.org/images/v2/img_taxon-placeholder.png';
+      }
+      res.render('taxon', {page: page, title: page.scientificName});
     }
-    res.render('taxon', {page: page, title: page.scientificName});
   });
 });
 

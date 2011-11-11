@@ -214,20 +214,19 @@ Page.prototype = {
               var dataObject = JSON.parse(body);
               page.image = dataObject.dataObjects[0].eolThumbnailURL;
               
-              self.callback(page);
+              return self.callback(null, page);
             } else {
-              // TODO handle error somehow
-              throw(error);
+              // Couldn't load image from EoL... Really not a big deal, so let's just ignore it for now.
+              return self.callback(null, page);
             }
           });
         } else {
-          self.callback(page);
+          return self.callback(null, page);
         }
         
       } else {
-        // Todo some bullshit
-        throw(error);
-        
+        // Could not load page from EoL. This is a problem.
+        return self.callback("Could not load page from EoL API", null);
       }
     });
   }
