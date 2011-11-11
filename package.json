@@ -1,8 +1,8 @@
 {
   "author": "Ryan Schenk <rschenk@gmail.com> (http://ryanschenk.com)",
-  "name": "blobtime",
+  "name": "synynyms",
   "description": "It's time for blobs, let's blob, hang out with yourself and have a crazy blob",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "."
