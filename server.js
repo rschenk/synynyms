@@ -67,24 +67,6 @@ app.configure('production', function(){
   app.set('port', 80);
 });
 
-io.configure('production', function(){
-  io.enable('browser client etag');
-  io.set('log level', 1);
-
-  io.set('transports', [
-    'websocket'
-  , 'flashsocket'
-  , 'htmlfile'
-  , 'xhr-polling'
-  , 'jsonp-polling'
-  ]);
-});
-
-io.configure('development', function(){
-  io.set('transports', ['websocket']);
-});
-
-
 app.get('/', function(req, res){
   res.render('index', {title: 'Visualize Taxononmic Synonyms'});
 });
