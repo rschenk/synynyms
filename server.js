@@ -74,7 +74,7 @@ io.configure('production', function(){
   io.set('log level', 1);                    // reduce logging
   io.set('transports', [                     // enable all transports (optional if you want flashsocket)
       'websocket'
-    , 'flashsocket'
+//    , 'flashsocket' // Firefox 8 and no.de is not working
     , 'htmlfile'
     , 'xhr-polling'
     , 'jsonp-polling'

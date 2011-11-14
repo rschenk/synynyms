@@ -16,7 +16,7 @@
 	  "connect": "1.7.x",
 	  "jade": "0.16.x",
 	  "request": "2.1.x",
-	  "socket.io": "0.8.4",
+	  "socket.io": "0.8.x",
 	  "underscore": "1.1.x",
 	  "stylus": "0.17.x",
 	  "nib": "0.2.x",
