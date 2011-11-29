@@ -2,17 +2,17 @@
   "author": "Ryan Schenk <rschenk@gmail.com> (http://ryanschenk.com)",
   "name": "synynyms",
   "description": "It's time for blobs, let's blob, hang out with yourself and have a crazy blob",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "repository": {
     "type": "git",
     "url": "."
   },
   "engines": {
-    "node": "0.4.x"
+    "node": "0.6.x"
   },
   "dependencies": {
     "csv": "0.0.x",
-	  "express": "2.4.x",
+	  "express": "2.5.x",
 	  "connect": "1.7.x",
 	  "jade": "0.16.x",
 	  "request": "2.1.x",
