@@ -95,7 +95,8 @@ app.get('/taxon/:id', function(req,res){
       res.render('taxon-error', {status: 502, message: 'Bad Gateway', title: "Problem Connecting to EoL"});
     } else {
       if( page.image ) {
-        page.image = page.image.replace('_medium', '_580_360'); // do a litle hack to get a bigger image from EOL
+        // do a litle hack to get a bigger image from EOL
+        page.image = page.image.split('_')[0] + '_580_360.jpg';
       } else {
         page.image = 'http://eol.org/images/v2/img_taxon-placeholder.png';
       }
