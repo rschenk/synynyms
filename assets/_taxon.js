@@ -1,4 +1,4 @@
-// I have no idea if I'm doing this right...
+// I have no idea if I'm doing this right!
 //= require underscore
 //= require backbone
 //= require raphael

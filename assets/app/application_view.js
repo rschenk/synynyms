@@ -7,6 +7,7 @@ var ApplicationView = Backbone.View.extend({
     this.aggregateList = $('#aggregate');
     this.taxaList = $('#taxa');
     
+    // View of the "All Names" aggregate
     this.aggregateView = new TaxonView({
       model: this.model.aggregate,
       histogramController: this.model.histogramController
@@ -24,7 +25,7 @@ var ApplicationView = Backbone.View.extend({
     var view = new TaxonView({
       model:taxon,
       collection: this.model.taxa,
-      histogramController: this.model.histogramController // used to scale this histograms proportionally
+      histogramController: this.model.histogramController // used to scale the plots relative to each other
     });
     this.taxaList.append(view.render().el);
   }

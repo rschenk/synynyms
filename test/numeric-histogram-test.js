@@ -48,7 +48,7 @@ vows.describe('NumericHistogram').addBatch({
         assert.equal(topic.length, 6)
       },
       
-      'iterating through the buckets': {
+      'iterating through the buckets with #each': {
         topic: function(histogram) {
           var k_v = {}
           histogram.each(function(value, key){ k_v[key] = value; });
@@ -121,7 +121,7 @@ vows.describe('NumericHistogram').addBatch({
         assert.throws(function () { topic.get(1991); }, Error);
       },
       
-      'iterating through the buckets': {
+      'iterating through the buckets with #each': {
         topic: function(histogram) {
           var k_v = {}
           histogram.each(function(value, key){ k_v[key] = value; });

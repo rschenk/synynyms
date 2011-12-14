@@ -1,4 +1,6 @@
 // Require Underscore, if we're on the server, and it's not already present.
+//
+// This file really should be symlinked
 var _ = _;
 if (!_ && (typeof require !== 'undefined')) _ = require('underscore')._;
 
