@@ -1,3 +1,6 @@
+// The Taxon model stores the name, id, state, and most importantly, the 
+// year-counts data as a histogram.
+
 var Taxon = Backbone.Model.extend({
   initialize: function(spec){
     if(!spec || !spec.name) {

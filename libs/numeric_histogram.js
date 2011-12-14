@@ -1,3 +1,12 @@
+// A NumericHistogram is a histogram that assumes the keys are integers.
+// For instance, in Synynyms, the keys are all years. 
+//
+// Integer keys allow NumericHistogram to expose itself as an Iterator,
+// and allow it to "rebucket" the keys into different intervals.
+//
+// Rebucketing allows you, for instance, to take a histogram with one-year 
+// buckets and transform it into a histogram with five-year buckets.
+//
 // Require Underscore, if we're on the server, and it's not already present.
 var _ = _;
 if (!_ && (typeof require !== 'undefined')) _ = require('underscore')._;
@@ -54,8 +63,8 @@ NumericHistogram.prototype = {
     return obj;
   },
   
-  // Whoa nelly, this is pretty hacktocious
-  // This functionality would be better off in a constructor that accepts a hash.
+  // Whoa nelly, this is a bit hacktocious
+  // TODO This functionality may be better off in a constructor that accepts a hash?
   rebucket: function(bucketSize){
     if(bucketSize < this.bucketSize) throw new Error("You can't rebucket into a smaller bucketSize");
     
