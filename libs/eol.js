@@ -1,9 +1,12 @@
+// This is an API client for Encyclopedia of Life. 
+// It adds some nice features, such as automatically parsing names through GNI, and 
+// automatically fetching images from DataObjects. 
+//
+// TODO There is basically no error handling. I should probably fix that.
 var EventEmitter = require('events').EventEmitter,
          request = require('request'),
      querystring = require('querystring'),
               _ = require('underscore');
-
-//var eyes = require('eyes');
 
 // Emits two events
 // 'name' with each new name found
@@ -92,12 +95,11 @@ SynonymSearch.prototype.findHierarchies = function(page){
 		var url = 'http://eol.org/api/hierarchy_entries/1.0/'+taxon_concept.identifier+'.json';
 		
 		// Fetch the hierarchy, and look for snynonymns in it
-		// console.log('REQUESTING: ' + url);
 		self.incrementRequests();
 		request.get( {url:url}, function(error, response, body) {
 			if (!error && response.statusCode == 200) {
 		      	self.findSynonyms( JSON.parse(body) );
-		    } else {
+		  } else {
 				console.error('ERROR fetching '+ url + ': ' + response.statusCode);
 				console.error(body);
 			}
@@ -122,13 +124,15 @@ SynonymSearch.prototype.findSynonyms = function(hierarchy){
 };
 
 // Hits the GNI API with a scientific name, and fetches the cannonical names
-// Multiple names can be fetched by passing an array
+// Multiple names can be fetched by passing an array.
+//
+// If one was to flesh out this EOL API client any further, it'd be wise to refactor this
+// out into its own GNI module, so that it could be reused throughout the EOL API client.
 SynonymSearch.prototype.fetchCannonicalName = function(name) {
 	if( _.isArray(name) ) name = name.join('|');
 	var self = this,
 	     url = 'http://gni.globalnames.org/parsers.json?' + querystring.stringify({names: name});
 	
-	// console.log('REQUESTING: ' + url);
 	self.incrementRequests();
 	request.get( {url:url}, function(error, response, body) {
 		if (!error && response.statusCode == 200) {
@@ -138,7 +142,7 @@ SynonymSearch.prototype.fetchCannonicalName = function(name) {
 				self.foundName(result.scientificName.canonical);
 			});
 	  } else {
-	    // TODO raise an exception
+	    // TODO pass this error back to the callback, rather than throwing
 			console.error('ERROR fetching '+ url + ': ' + response.statusCode);
 			console.error(body);
 			throw(error);
@@ -147,7 +151,7 @@ SynonymSearch.prototype.fetchCannonicalName = function(name) {
 	});
 };
 
-
+// Models the EOL Search API.
 SpeciesSearch = function(query, callback) {
   this.query = query;
   this.callback = callback;
@@ -164,7 +168,6 @@ SpeciesSearch.prototype = {
   searchFor: function(q) {
     var self = this;
     var url = this.searchUrlBase + escape(q) + '.json';
-    // console.log(url);
     
     request.get( {url:url}, function(error, response, body) {
       if (!error && response.statusCode == 200) {
@@ -174,7 +177,7 @@ SpeciesSearch.prototype = {
         self.callback(species);
         
       } else {
-        // TODO throw an error
+        // TODO be nice to pass the error back to the callback. 
         console.error('ERROR fetching '+ url + ': ' + response.statusCode);
         console.error(body);
         throw(error);
@@ -183,6 +186,9 @@ SpeciesSearch.prototype = {
   }
 }
 
+
+// This hits the EOL Pages API, 
+// then automatically goes out and fetches the first image from the EOL DataObjects API
 Page = function(taxonId, callback) {
   this.taxonId = taxonId;
   this.callback = callback;
@@ -192,23 +198,20 @@ Page = function(taxonId, callback) {
   return this;
 }
 Page.prototype = {
-  pageUrlBase: 'http://eol.org/api/pages/1.0/', // good idea to refactor all these to a central place
+  pageUrlBase: 'http://eol.org/api/pages/1.0/', // good idea to refactor all these endpoints to a central place
   dataObjectUrlBase: 'http://eol.org/api/data_objects/1.0/',
   
-  // hits the pages api, then goes and fetches an image from data_objects
+  // hit the pages api, then goes and fetches an image from data_objects
   retrievePage:function(taxonId) {
     var self = this;
     var url = this.pageUrlBase + taxonId + '.json?images=1&videos=0&text=0'
     
-    //console.log('REQUESTING: ' + url );
     request.get({url:url}, function(error, response, body) {
       if (!error && response.statusCode == 200) {
         var page = JSON.parse(body);
         var image = _(page.dataObjects).filter(function(o){ return o.dataType === 'http://purl.org/dc/dcmitype/StillImage' })[0];
         
-        if(image){
-          //console.log('REQUESTING: ' + self.dataObjectUrlBase + image.identifier + '.json' );
-          
+        if(image){          
           request.get({url: self.dataObjectUrlBase + image.identifier + '.json'}, function(error, response, body){
             if (!error && response.statusCode == 200) {
               var dataObject = JSON.parse(body);
@@ -216,7 +219,8 @@ Page.prototype = {
               
               return self.callback(null, page);
             } else {
-              // Couldn't load image from EoL... Really not a big deal, so let's just ignore it for now.
+              // Couldn't load image from EoL... it could be a network error, or the taxa may not have an image. 
+              // Really not a big deal, so let's just ignore it for now.
               return self.callback(null, page);
             }
           });

@@ -7,7 +7,9 @@
 // Rebucketing allows you, for instance, to take a histogram with one-year 
 // buckets and transform it into a histogram with five-year buckets.
 //
-// Require Underscore, if we're on the server, and it's not already present.
+// This class works in both Node and in the browser. Neato!
+
+// Require Underscore, if we're on the server and it's not already present.
 var _ = _;
 if (!_ && (typeof require !== 'undefined')) _ = require('underscore')._;
 
