@@ -29,4 +29,4 @@ var ApplicationView = Backbone.View.extend({
     });
     this.taxaList.append(view.render().el);
   }
-})
+});
