@@ -1,3 +1,4 @@
+var util = require('util');
 var express = require('express');
 var connect = require('connect');
 var jade = require('jade');
@@ -7,35 +8,12 @@ var _   = require('underscore');
 var eol = require('./libs/eol');
 var bhl = require('./libs/bhl');
 
-var app = express.createServer();
-var io  = require('socket.io').listen(app);
 
 
-
-// FOR TESTING ONLY
-/* var fakeweb = require('node-fakeweb');
-var fs = require('fs');
-function stubUri(uri, response_file) {
-  response_file = response_file || unescape(_(uri.split('/')).last());
-  
-  fakeweb.registerUri({
-    uri: uri,
-    body: fs.readFileSync('./test/fake_http_responses/' + response_file, 'utf8') 
-  });
-}
-stubUri("http://eol.org/api/pages/1.0/795869.json?common_names=0&details=0&images=0&videos=0&text=0");
-stubUri("http://gni.globalnames.org/parsers.json?names=Anolis%20carolinensis%20Voigt%2C%201832");
-stubUri("http://eol.org/api/hierarchy_entries/1.0/24917138.json");
-stubUri("http://eol.org/api/hierarchy_entries/1.0/29138121.json");
-stubUri("http://eol.org/api/hierarchy_entries/1.0/34308252.json");
-stubUri("http://eol.org/api/hierarchy_entries/1.0/36759263.json");
-stubUri("http://gni.globalnames.org/parsers.json?names=Anolis%20bullaris%20DAUDIN%201802%7CAnolis%20principalis%20GRAY%201845%7CDactyloa%20(Ctenocercus)%20carolinensis%20FITZINGER%201843%7CLacerta%20principalis%20LINNAEUS%201758");
-stubUri("http://www.biodiversitylibrary.org/Services/NameListDownloadService.ashx?type=c&name=Anolis%20carolinensis");
-stubUri("http://www.biodiversitylibrary.org/Services/NameListDownloadService.ashx?type=c&name=Anolis%20bullaris");
-stubUri("http://www.biodiversitylibrary.org/Services/NameListDownloadService.ashx?type=c&name=Anolis%20principalis");
-stubUri("http://www.biodiversitylibrary.org/Services/NameListDownloadService.ashx?type=c&name=Dactyloa%20carolinensis");
-stubUri("http://www.biodiversitylibrary.org/Services/NameListDownloadService.ashx?type=c&name=Lacerta%20principalis");
-*/
+var app = express()
+  , http = require('http')
+  , server = http.createServer(app)
+  , io = require('socket.io').listen(server);
 
 app.configure(function(){
   app.set('view engine', 'jade');
@@ -52,6 +30,15 @@ app.configure(function(){
   app.use(express.logger());
   app.use(app.router);
   app.use(require('connect-assets')());
+  app.use(function(err, req, res, next){
+    // if an error occurs Connect will pass it down
+    // through these "error-handling" middleware
+    // allowing you to respond however you like
+    util.puts(err.stack);
+    res.statusCode=500;
+    res.render('500.jade', { title:"Uh Oh", error:err });
+  })
+  
 });
 
 app.configure('development', function(){
@@ -74,7 +61,7 @@ io.configure('production', function(){
   io.set('log level', 1);                    // reduce logging
   io.set('transports', [                     // enable all transports (optional if you want flashsocket)
       'websocket'
-//    , 'flashsocket' // Firefox 8 and no.de is not working
+    , 'flashsocket'
     , 'htmlfile'
     , 'xhr-polling'
     , 'jsonp-polling'
@@ -124,12 +111,10 @@ app.get('/search', function(req, res) {
    });
 });
 
-app.error(function(err,req,res){
-  res.render('500.jade', { status:500, title:"Uh Oh", error:err });
-});
 
-app.listen(app.settings.port || 3000);
-console.log("Express server listening on port " + app.address().port);
+server.listen(app.settings.port || 3000);
+console.log("Express server listening on " + util.inspect(server.address()));
+
 
 io.set('log level', 2);
 io.sockets.on('connection',function(socket) {

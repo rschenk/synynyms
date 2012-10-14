@@ -8,23 +8,27 @@
     "url": "."
   },
   "engines": {
-    "node": "0.4.11"
+    "node": "0.6.x"
   },
   "dependencies": {
     "csv": "0.0.x",
-	  "express": "2.5.x",
-	  "connect": "1.7.x",
-	  "jade": "0.16.x",
-	  "request": "2.1.x",
-	  "socket.io": "0.8.x",
-	  "underscore": "1.1.x",
-	  "stylus": "0.17.x",
-	  "nib": "0.2.x",
-	  "connect-assets": "2.1.4" 
+    "express": "3.0.x",
+    "connect": "1.7.x",
+    "jade": "0.27.x",
+    "request": "2.1.x",
+    "socket.io": "0.9.x",
+    "underscore": "1.1.x",
+    "stylus": "0.17.x",
+    "nib": "0.2.x",
+    "connect-assets": "2.3.x"
   },
   "devDependencies": {
     "eyes": "0.1.x",
     "node-fakeweb": "0.0.x",
     "vows": "0.5.x"
+  },
+  "subdomain": "synynyms",
+  "scripts": {
+    "start": "server.js"
   }
 }
