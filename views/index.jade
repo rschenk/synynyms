@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  #home 
+    .container
+      h1 visualize the rise and fall of taxononmic synonyms
+      #introduction
+        p You probably knew that species have scientific names written in Latin. But did you know that one organism typically has several of them? And that they are sometimes hotly contested?
+        p This applications finds all the different names for a particular species, and visualizes how often those names were published through history. You can see how the use of names grow and change. The names are provided by the <a href="http://eol.org">Encyclopedia of Life</a> and the publications are from the <a href="http://biodiversitylibrary.org">Biodiversity Heritage Library</a>.
+      #screenshot: img(src='/images/screenshot.png')
+  #examples
+    .container
+      h1 try out some examples
+
+  examples = [[{id: 326924,  commonName: 'Guinea Pig', scientificName: 'Cavia porcellus', image: 'http://content60.eol.org/content/2010/01/01/08/97707_medium.jpg'}, {id: 795869,  commonName: 'Green Anole', scientificName: 'Anolis carolinensis', image: 'http://content64.eol.org/content/2009/09/20/01/05528_medium.jpg'}, {id: 205264,  commonName: 'Bluefish', scientificName: 'Pomatomus saltatrix', image: 'http://content62.eol.org/content/2010/01/01/09/89213_medium.jpg'}],[{id: 1177347, commonName: 'Bumblebee', scientificName: 'Bombus terrestris', image: 'http://content63.eol.org/content/2010/03/24/03/07871_medium.jpg'},{id: 1025102, commonName: 'Screech Owl', scientificName: 'Megascops asio', image: 'http://content61.eol.org/content/2009/02/13/01/37062_medium.jpg'},{id: 207395,  commonName: 'Pacific Sea Horse', scientificName: 'Hippocampus ingens', image: 'http://content64.eol.org/content/2009/05/21/15/47105_medium.jpg'}],[{id: 794552,  commonName: 'Beach Rose', scientificName: 'Rosa rugosa', image: 'http://content64.eol.org/content/2010/03/24/04/14582_medium.jpg'},{id: 1049434, commonName: 'Andean Flamingo', scientificName: 'Phoenicopterus andinus', image: 'http://content61.eol.org/content/2011/08/12/23/97409_medium.jpg'},{id: 2923768, commonName: 'Capybara', scientificName: 'Hydrochoerus hydrochaeris', image: 'http://content60.eol.org/content/2011/02/08/23/18800_medium.jpg'}]]
+  each group in examples
+    .exampleGroup
+      .container
+        each example in group
+          include example

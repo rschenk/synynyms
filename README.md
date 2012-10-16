@@ -13,7 +13,7 @@ Installation
 - Install npm `curl http://npmjs.org/install.sh | sh`
 - Clone synynyms `git clone git@github.com:rschenk/synynyms.git; cd synynyms`
 - Install dependencies `npm install .`
-- Run it! `node server.js`
+- Run it! `node app`
 
 By default it will listen on port 3000
 
