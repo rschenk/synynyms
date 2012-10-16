@@ -1,26 +1,29 @@
 {
-  "name": "synynyms",
   "author": "Ryan Schenk <rschenk@gmail.com>",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": true,
   "scripts": {
-    "start": "node app"
+    "start": "node ./app.js"
   },
   "dependencies": {
-    "express": "3.0.0rc5",
+    "express": "3.0.x",
     "jade": "0.27.x",
-    "stylus": "0.29.x",
+    "stylus": "0.28.x",
     "connect-assets": "2.3.x",
     "socket.io": "0.9.x",
     "csv": "0.0.x",
     "request": "2.1.x",
     "underscore": "1.1.x",
-    "stylus": "0.28.x",
     "nib": "0.8.x"
   },
   "devDependencies": {
     "eyes": "0.1.x",
     "node-fakeweb": "0.0.x",
     "vows": "0.5.x"
-  }
+  },
+  "engines": {
+    "node": "0.8.x"
+  },
+  "name": "synynyms",
+  "subdomain": "synynyms"
 }
