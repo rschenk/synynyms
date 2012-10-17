@@ -1,6 +1,6 @@
 {
   "author": "Ryan Schenk <rschenk@gmail.com>",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": true,
   "scripts": {
     "start": "node ./app.js"
@@ -27,7 +27,7 @@
   "name": "synynyms",
   "subdomain": "synynyms",
   "domains": [
-      "synynyms.com",
-      "www.synynyms.com"
-    ]
+    "synynyms.com",
+    "www.synynyms.com"
+  ]
 }
