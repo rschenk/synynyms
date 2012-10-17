@@ -25,5 +25,9 @@
     "node": "0.8.x"
   },
   "name": "synynyms",
-  "subdomain": "synynyms"
+  "subdomain": "synynyms",
+  "domains": [
+      "synynyms.com",
+      "www.synynyms.com"
+    ]
 }
